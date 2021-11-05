@@ -7,7 +7,7 @@ const {
   updateUser,
   updateAvatar,
 } = require('../controllers/users');
-const linkValidator = require('../middlewares/link-validation');
+const linkValidator = require('../helpers/link-validation');
 
 router.get('/', getUsers);
 router.get('/me', getCurrentUser);

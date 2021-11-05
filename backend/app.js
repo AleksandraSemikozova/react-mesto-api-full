@@ -10,16 +10,21 @@ const cardsRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
 const NotFoundError = require('./errors/not-found-error');
-const error = require('./middlewares/error');
-const linkValidator = require('./middlewares/link-validation');
+const error = require('./helpers/error');
+const linkValidator = require('./helpers/link-validation');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
-const { PORT = 3000 } = process.env;
 const app = express();
+const { PORT = 3000 } = process.env;
+
+app.use(cors);
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
+app.use(requestLogger);
 app.use(express.json());
 
 app.post(
@@ -54,7 +59,7 @@ app.use('/cards', cardsRouter);
 app.all('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
-
+app.use(errorLogger);
 app.use(errors());
 
 app.use(error);

@@ -49,18 +49,26 @@ class Api {
   } // Отправляем новый аватар ползователя
 
   likeCard(cardId) {
-    return fetch(`${this._address}/cards/likes/${cardId}`, {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers,
     }).then(this._checkResponse);
   } // Информация о лайках
 
   dislikeCard(cardId) {
-    return fetch(`${this._address}/cards/likes/${cardId}`, {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._checkResponse);
   } // Снимаем лайк
+
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return this.dislikeCard(cardId);
+    } else {
+      return this.likeCard(cardId);
+    }
+  }
 
   removeCard(cardId) {
     return fetch(`${this._address}/cards/${cardId}`, {
@@ -76,19 +84,18 @@ class Api {
     return res.json();
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
-    if (isLiked) {
-      return this.dislikeCard(cardId);
-    } else {
-      return this.likeCard(cardId);
+  updateHeaders() {
+    this._headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`
     }
   }
 }
 
 const api = new Api({
-  address: 'https://mesto.nomoreparties.co/v1/cohort-26',
+  address: 'https://api.mesto.semikozova.nomoredomains.rocks',
   headers: {
-    authorization: 'd147ccf3-fe7d-432e-976a-2d83c2abca13',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-type': 'application/json',
   },
 });

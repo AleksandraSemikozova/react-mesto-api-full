@@ -7,7 +7,7 @@ const {
   likeCard,
   dislikeCard,
 } = require('../controllers/cards');
-const linkValidator = require('../middlewares/link-validation');
+const linkValidator = require('../helpers/link-validation');
 
 router.get('/', getCards);
 

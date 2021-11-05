@@ -29,7 +29,7 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState({});
 
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({_id: null, avatar: ''});
 
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -156,8 +156,10 @@ function App() {
   }
 
   function handleSignOut() {
+    setCurrentUser({_id: null, avatar: ''});
     setLoggedIn(false);
     localStorage.removeItem('jwt');
+    api.updateHeaders();
     setEmail('');
     history.push('/sign-in');
   }
@@ -177,7 +179,7 @@ function App() {
     auth
       .register(email, password)
       .then((res) => {
-        if (res) {
+        if (res.status === 201 || res.status === 200) {
           handleInfoTooltipContent({
             iconPath: registrationOk,
             text: 'Вы успешно зарегистрировались!',
@@ -186,11 +188,19 @@ function App() {
           setTimeout(history.push, 3000, '/sign-in');
           setTimeout(closeAllPopups, 2500);
         }
+        if (res.status === 400) {
+          handleInfoTooltipContent({
+            iconPath: registrationError,
+            text: 'Некорректно заполнено одно из полей',
+          });
+          handleInfoTooltipOpen();
+          setTimeout(closeAllPopups, 2500);
+        }
       })
       .catch((err) => {
         handleInfoTooltipContent({
           iconPath: registrationError,
-          text: 'Некорректно заполнено одно из полей',
+          text: 'Что-то пошло не так! Попробуйте еще раз!',
         });
         handleInfoTooltipOpen();
         setTimeout(closeAllPopups, 2500);
