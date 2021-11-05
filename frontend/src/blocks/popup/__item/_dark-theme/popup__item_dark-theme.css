@@ -1,0 +1,5 @@
+.popup__item_dark-theme {
+  border-bottom: 2px solid rgba(204, 204, 204, 1);
+  background-color: #000;
+  color: white;
+}

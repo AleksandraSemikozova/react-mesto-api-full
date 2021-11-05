@@ -1,0 +1,9 @@
+.popup__input-label {
+  display: flex;
+  position: relative;
+  margin-bottom: 31px;
+}
+
+.popup__input-label:last-of-type {
+  margin-bottom: 10px;
+}

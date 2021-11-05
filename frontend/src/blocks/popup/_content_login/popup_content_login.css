@@ -1,0 +1,6 @@
+.popup_content_login {
+  display: flex;
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+}

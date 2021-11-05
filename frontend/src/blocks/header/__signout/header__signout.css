@@ -1,0 +1,14 @@
+.header__signout {
+  display: block;
+  height: 22px;
+  width: 58px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #a9a9a9;
+  text-decoration: none;
+}
+
+.header__signout:hover {
+  color: white;
+  opacity: 0.6;
+}

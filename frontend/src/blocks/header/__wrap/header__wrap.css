@@ -1,0 +1,10 @@
+.header__wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 670px) {
+  .header__wrap {
+flex-direction: column;  }
+}

@@ -1,0 +1,11 @@
+.popup__container_dark-theme {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 430px;
+  max-width: 430px;
+  background-color: #000000;
+  border: none;
+  text-align: center;
+}
