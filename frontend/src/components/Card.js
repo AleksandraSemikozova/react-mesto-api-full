@@ -1,6 +1,6 @@
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   
@@ -30,7 +30,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     onCardDelete(card);
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     console.log('currentUser', currentUser);
     console.log('cardDeleteButtonClassName', cardDeleteButtonClassName);
     console.log('cardLikeButtonClassName', cardLikeButtonClassName);
