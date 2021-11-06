@@ -88,7 +88,7 @@ function App() {
           console.log("res in effect", res);
 
           setLoggedIn(true);
-          setEmail(res.data.email);
+          setEmail(res.email);
           api.updateHeaders();
           history.push('/');
         })
@@ -171,7 +171,7 @@ function App() {
     auth
       .getContent(jwt)
       .then((res) => {
-        setEmail(res.data.email);
+        setEmail(res.email);
       })
       .catch((err) => {
         console.log(err);
