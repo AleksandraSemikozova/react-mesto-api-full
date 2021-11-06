@@ -3,6 +3,8 @@ const NotAuthError = require('../errors/not-auth-error');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
+const extractBearerToken = (header) => header.replace('Bearer ', '');
+
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
