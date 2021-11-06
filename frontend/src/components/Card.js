@@ -6,13 +6,13 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   
   const currentUser = React.useContext(CurrentUserContext);
 
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   const cardDeleteButtonClassName = `element__remove-btn ${
     isOwn ? 'element__remove-btn' : 'element__remove-btn_hidden'
   }`;
 
-  const isLiked = card.likes.some((item) => item._id === currentUser._id);
+  const isLiked = card.likes.some((item) => item === currentUser._id);
 
   const cardLikeButtonClassName = `element__like-btn ${
     isLiked ? 'element__like-btn_active' : ''
@@ -31,10 +31,11 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }
 
   React.useEffect(() => {
+    console.log('isOwn', isOwn);
     console.log('currentUser', currentUser);
     console.log('cardDeleteButtonClassName', cardDeleteButtonClassName);
     console.log('cardLikeButtonClassName', cardLikeButtonClassName);
-  }, [currentUser, cardDeleteButtonClassName, cardLikeButtonClassName]);
+  }, [isOwn, currentUser, cardDeleteButtonClassName, cardLikeButtonClassName]);
 
   return (
     <li className="element">
@@ -52,7 +53,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
       ></button>
       <div className="element__description">
         <h2 className="element__text">{card.name}</h2>
-        <div className="element__like-group">
+       <div className="element__like-group">
           <button
             type="button"
             aria-label="Нравится"
