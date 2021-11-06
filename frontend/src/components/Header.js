@@ -6,6 +6,7 @@ function Header({ loggedIn, email, handleSignOut }) {
   const { pathname } = useLocation();
   const text = `${pathname === '/sign-in' ? 'Регистрация' : 'Войти'}`;
   const linkRoute = `${pathname === '/sign-in' ? '/sign-up' : '/sign-in'}`;
+  
 
   return (
     <header className="header">

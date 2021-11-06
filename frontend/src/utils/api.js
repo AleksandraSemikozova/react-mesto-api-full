@@ -49,14 +49,14 @@ class Api {
   } // Отправляем новый аватар ползователя
 
   likeCard(cardId) {
-    return fetch(`${this._address}/cards/likes/${cardId}`, {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers,
     }).then(this._checkResponse);
   } // Информация о лайках
 
   dislikeCard(cardId) {
-    return fetch(`${this._address}/cards/likes/${cardId}`, {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._checkResponse);
@@ -94,6 +94,7 @@ class Api {
 
 const api = new Api({
   address: 'https://api.mesto.semikozova.nomoredomains.rocks',
+  // address: 'http://localhost:3001',
   headers: {
     'authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-type': 'application/json',
