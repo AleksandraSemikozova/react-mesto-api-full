@@ -1,7 +1,9 @@
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { useEffect } from 'react';
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = card.owner._id === currentUser._id;
@@ -27,6 +29,12 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   function handleCardDelete() {
     onCardDelete(card);
   }
+
+  useEffect(() => {
+    console.log('currentUser', currentUser);
+    console.log('cardDeleteButtonClassName', cardDeleteButtonClassName);
+    console.log('cardLikeButtonClassName', cardLikeButtonClassName);
+  }, [currentUser, cardDeleteButtonClassName, cardLikeButtonClassName]);
 
   return (
     <li className="element">
