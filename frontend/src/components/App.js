@@ -79,12 +79,13 @@ function App() {
 
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
+
     if (jwt) {
       auth
         .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
-          setEmail(res.data.email);
+          setEmail(res.data.email);          
           api.updateHeaders();
           history.push('/');
         })
