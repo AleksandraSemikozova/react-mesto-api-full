@@ -30,13 +30,6 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     onCardDelete(card);
   }
 
-  React.useEffect(() => {
-    console.log('isOwn', isOwn);
-    console.log('currentUser', currentUser);
-    console.log('cardDeleteButtonClassName', cardDeleteButtonClassName);
-    console.log('cardLikeButtonClassName', cardLikeButtonClassName);
-  }, [isOwn, currentUser, cardDeleteButtonClassName, cardLikeButtonClassName]);
-
   return (
     <li className="element">
       <img
