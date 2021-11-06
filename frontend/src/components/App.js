@@ -85,6 +85,7 @@ function App() {
         .then((res) => {
           setLoggedIn(true);
           setEmail(res.data.email);
+          api.updateHeaders();
           history.push('/');
         })
         .catch((err) => {

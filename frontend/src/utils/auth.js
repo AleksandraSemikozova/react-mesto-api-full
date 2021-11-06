@@ -1,5 +1,7 @@
-export const BASE_URL = 'https://api.mesto.semikozova.nomoredomains.rocks';
+import api from "./api";
 
+// export const BASE_URL = 'https://api.mesto.semikozova.nomoredomains.rocks';
+export const BASE_URL = 'https://localhost:3001'
 const checkResponse = (res) => {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);
@@ -32,6 +34,7 @@ export const authorize = ({ email, password }) => {
     .then((data) => {
       if (data.token) {
         localStorage.setItem('jwt', data.token);
+        api.updateHeaders();
         return data.token;
       }
     });
