@@ -29,7 +29,7 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState({});
 
-  const [currentUser, setCurrentUser] = React.useState({_id: null, avatar: ''});
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -38,7 +38,7 @@ function App() {
   const [message, setMessage] = React.useState({ iconPath: '', text: '' });
 
   React.useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([info, data]) => {
         setCurrentUser(info);
         setCards(data);
@@ -46,7 +46,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [loggedIn]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -80,13 +80,15 @@ function App() {
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     console.log("JWT in effect", jwt);
+
     if (jwt) {
       auth
         .getContent(jwt)
         .then((res) => {
           console.log("res in effect", res);
+
           setLoggedIn(true);
-          setEmail(res.data.email);          
+          setEmail(res.data.email);
           api.updateHeaders();
           history.push('/');
         })
@@ -159,10 +161,8 @@ function App() {
   }
 
   function handleSignOut() {
-    setCurrentUser({_id: null, avatar: ''});
     setLoggedIn(false);
     localStorage.removeItem('jwt');
-    api.updateHeaders();
     setEmail('');
     history.push('/sign-in');
   }
@@ -182,7 +182,7 @@ function App() {
     auth
       .register(email, password)
       .then((res) => {
-        if (res.status === 201 || res.status === 200) {
+        if (res) {
           handleInfoTooltipContent({
             iconPath: registrationOk,
             text: 'Вы успешно зарегистрировались!',
@@ -191,19 +191,11 @@ function App() {
           setTimeout(history.push, 3000, '/sign-in');
           setTimeout(closeAllPopups, 2500);
         }
-        if (res.status === 400) {
-          handleInfoTooltipContent({
-            iconPath: registrationError,
-            text: 'Некорректно заполнено одно из полей',
-          });
-          handleInfoTooltipOpen();
-          setTimeout(closeAllPopups, 2500);
-        }
       })
       .catch((err) => {
         handleInfoTooltipContent({
           iconPath: registrationError,
-          text: 'Что-то пошло не так! Попробуйте еще раз!',
+          text: 'Некорректно заполнено одно из полей',
         });
         handleInfoTooltipOpen();
         setTimeout(closeAllPopups, 2500);
