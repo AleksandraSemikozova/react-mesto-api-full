@@ -93,7 +93,7 @@ class Api {
 }
 
 const api = new Api({
-  address: 'http://localhost:3001',
+  address: 'https://api.mesto.semikozova.nomoredomains.rocks',
   headers: {
     'authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-type': 'application/json',
