@@ -44,7 +44,8 @@ const getCurrentUser = (req, res, next) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));
       } next(err);
-    });
+    })
+    .catch(next);
 };
 
 const createUser = (req, res, next) => {
