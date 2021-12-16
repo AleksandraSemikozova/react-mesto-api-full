@@ -3,6 +3,6 @@
   
 # Сервер
 
-- Публичный IP-адрес сервера: 178.154.193.42
+- Публичный IP-адрес сервера: 51.250.29.165
 - Домен сервера: https://api.mesto.semikozova.nomoredomains.rocks
 - Размещение фронтенда на сервере: https://mesto.semikozova.nomoredomains.rocks
